@@ -1,0 +1,17 @@
+{
+  "name": "Standard ML",
+  "package": "SML",
+  "index": "manpages.html",
+  "externalURL": "https://smlfamily.github.io/Basis/overview.html",
+  "selectors": {
+    "h2 code": "Type",
+    "dl dt code[data-type=binding]":   {"attr": "title", "type": "Binding"},
+    "dl dt code[data-type=constant]":  {"attr": "title", "type": "Constant"},
+    "dl dt code[data-type=define]":    {"attr": "title", "type": "Define"},
+    "dl dt code[data-type=exception]": {"attr": "title", "type": "Exception"},
+    "dl dt code[data-type=function]":  {"attr": "title", "type": "Function"},
+    "dl dt code[data-type=operator]":  {"attr": "title", "type": "Operator"},
+    "dl dt code[data-type=structure]": {"attr": "title", "type": "Structure"},
+    "dl dt code[data-type=type]":      {"attr": "title", "type": "Type"}
+  }
+}

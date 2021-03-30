@@ -1,0 +1,11 @@
+{
+  "name": "Standard ML",
+  "archive": "SML.docset.tgz",
+  "author": {
+    "name": "Ivan Kuchin",
+    "link": "https://github.com/toy"
+  },
+  "aliases": [
+    "SML"
+  ]
+}

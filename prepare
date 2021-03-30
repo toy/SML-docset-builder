@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+
+require 'pathname'
+require 'nokogiri'
+
+OUT = Pathname('out')
+OUT.mkpath
+
+Pathname.glob('basis/*.html') do |src|
+  doc = src.open{ |f| Nokogiri::HTML(f) }
+
+  # split entries separated by <br />
+  doc.search('dl dt code').each do |code|
+    next unless code.children.any?{ |child| child.name == 'br' }
+
+    code.children
+      .chunk{ |child| child.name == 'br' ? :_separator : true }
+      .map(&:last)
+      .slice_before{ |child| child[0].to_s !~ /\A\s+(&nbsp;|\})/ }
+      .drop(1)
+      .each do |children|
+        new_dt = Nokogiri::XML::Node.new('dt', doc)
+        code.parent.add_next_sibling(new_dt)
+
+        new_code = Nokogiri::XML::Node.new('code', doc)
+        new_code.parent = new_dt
+
+        children.flatten(1).each do |child|
+          child.parent = new_code
+        end
+      end
+
+    code.children.last.remove while code.children.last.name == 'br'
+  end
+
+  doc.search('dl dt code').each do |code|
+    text = code.text.strip.tr("\u00a0", ' ')
+    code['data-type'], code['title'] = case text
+    when /\Aexception (\S+)/
+      ['exception', $1]
+    when /\Aval (\S+)/
+      ['binding', $1]
+    when /\Astructure (\S+)/
+      ['structure', $1]
+    when /\A(?:type|datatype) (?:'\S+ |\(.*?\) )?(\S+)/
+      ['type', $1]
+    when /\Aeqtype (\S+)/
+      ['define', "eqtype #{$1}"]
+    when /\A"(\S+)"/, /\A[=|] (\S+)/
+      ['constant', $1]
+    when /\A[a-z] (\S+) [a-z]\z/, /\A[a-z]1 (\S+) [a-z]2\z/, /\Are (:=) a\z/
+      ['operator', $1]
+    else
+      ['function', text[/\S+/]]
+    end
+  end
+
+  (OUT / src.basename).open('w'){ |f| f.write(doc.to_html) }
+end
