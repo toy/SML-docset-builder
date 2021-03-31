@@ -11,7 +11,7 @@
     "dl dt code[data-type=exception]": {"attr": "title", "type": "Exception"},
     "dl dt code[data-type=function]":  {"attr": "title", "type": "Function"},
     "dl dt code[data-type=operator]":  {"attr": "title", "type": "Operator"},
-    "dl dt code[data-type=structure]": {"attr": "title", "type": "Structure"},
+    "dl dt code[data-type=struct]":    {"attr": "title", "type": "Struct"},
     "dl dt code[data-type=type]":      {"attr": "title", "type": "Type"}
   }
 }

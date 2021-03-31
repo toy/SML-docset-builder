@@ -41,7 +41,7 @@ Pathname.glob('basis/*.html') do |src|
     when /\Aval (\S+)/
       ['binding', $1]
     when /\Astructure (\S+)/
-      ['structure', $1]
+      ['struct', $1]
     when /\A(?:type|datatype) (?:'\S+ |\(.*?\) )?(\S+)/
       ['type', $1]
     when /\Aeqtype (\S+)/
