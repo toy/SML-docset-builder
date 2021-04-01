@@ -1,7 +1,7 @@
 build : SML.docset.tgz
 
 SML.docset.tgz : SML.docset
-	tar --exclude='.DS_Store' -cvzf "$@" "$<"
+	docker run --rm -it -v "$$(pwd)":/here -w /here ubuntu tar --exclude='.DS_Store' -cvzf "$@" "$<"
 
 SML.docset : out
 	rm -rf "$@"
@@ -16,4 +16,4 @@ basis :
 	svn export https://github.com/SMLFamily/SMLFamily.github.io.git/trunk/Basis "$@"
 
 clean:
-	rm -r SML.docset out basis
+	rm -rf SML.docset.tgz SML.docset out basis
