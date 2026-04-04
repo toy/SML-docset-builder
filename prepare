@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'pathname'
-require 'nokogiri'
+require 'bundler/setup'
+
+Bundler.require
 
 OUT = Pathname('out')
 OUT.mkpath

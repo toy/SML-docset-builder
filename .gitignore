@@ -1,3 +1,4 @@
 /out/
-/SML.docset/
-/SML.docset.tgz
+/*.docset/
+/*.docset.tgz
+/Gemfile.lock

@@ -10,6 +10,7 @@ Build instructions:
 ```shell
 git clone https://github.com/toy/SML-docset-builder.git
 cd SML-docset-builder
+bundle install
 make
 ```
 
