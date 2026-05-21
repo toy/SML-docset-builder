@@ -1,7 +1,7 @@
 build : SML.docset.tgz
 
 SML.docset.tgz : SML.docset
-	docker run --rm -i -v "$$(pwd)":/here -w /here ubuntu tar --exclude='.DS_Store' -cvzf "$@" "$<"
+	docker run --rm -i -v "$$(pwd)":/here -w /here debian tar --exclude='.DS_Store' -cvzf "$@" "$<"
 
 SML.docset : out
 	rm -rf "$@"
